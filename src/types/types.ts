@@ -1,31 +1,30 @@
 export interface SignUp {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 }
+
+export interface RegisteredUser extends SignUp {}
 
 export interface Login {
   email: string;
   password: string;
 }
 
-export interface LoginResponse {
-  data: {
-    access_token: string;
-    token_type: string;
-  };
-  message: string;
-}
-
-export interface TokenResponse {
+export interface AuthToken {
   access_token: string;
-  token_type: string;
+  token_type: 'Bearer';
 }
 
-export interface UserResponse {
-  id: number;
-  email: string;
+export interface AuthSession {
+  user: {
+    email: string;
+    firstName: string;
+    lastName: string;
+  };
+  token: AuthToken;
 }
-
 
 export interface Guarantor {
   fullName: string;
@@ -74,7 +73,7 @@ export interface User {
   email: string;
   phone?: string;
   dateJoined: string;
-  status: 'Active' | 'Inactive' | 'Pending' | 'Blacklisted';
+  status: "Active" | "Inactive" | "Pending" | "Blacklisted";
   tier: number;
   account: Account;
   profile: Profile;

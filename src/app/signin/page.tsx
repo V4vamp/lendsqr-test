@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.scss";
 import Link from "next/link";
-import { useLogin } from "@/hooks/useLogin";
+import { Login } from "@/types/types";
+import { getStoredUser, saveSession } from "@/utils/auth";
+import { generateAuthToken } from "@/utils/authToken";
 import { useRouter } from "next/navigation";
-import { setToken } from "@/utils/auth";
 
 const Page = () => {
   const router = useRouter();
-  const { mutate, isPending, error } = useLogin();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -19,6 +19,7 @@ const Page = () => {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {}
   );
+  const [error, setError] = useState("");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -52,21 +53,34 @@ const Page = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutate(loginData, {
-      onSuccess: (res) => {
-        const token = res.data.access_token;
-        setToken(token);
-        router.push("/");
+    if (!isValid) return;
+    const user = getStoredUser();
+
+    if (!user) {
+      setError("No account found. Please sign up.");
+      return;
+    }
+
+    if (
+      user.email !== loginData.email ||
+      user.password !== loginData.password
+    ) {
+      setError("Invalid email or password");
+      return;
+    }
+
+    const token = generateAuthToken();
+
+    saveSession({
+      user: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
       },
-      onError: (error) => {
-        const err = error as any;
-        if (err.response?.data?.message) {
-          setErrors(err.response.data.message);
-        } else {
-          setErrors;
-        }
-      },
+      token,
     });
+
+    router.push("/dashboard");
   };
   return (
     <div className={styles.loginPage}>

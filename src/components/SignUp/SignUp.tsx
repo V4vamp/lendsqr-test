@@ -1,13 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-// import Navbar from "@/components/Navbar/Navbar";
-// import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import Link from "next/link";
-// import { useMutation } from "@tanstack/react-query";
-// import api from "@/lib/api";
+import { SignUp } from "@/types/types";
+import { saveUser, saveSession } from "@/utils/auth";
+import { generateAuthToken } from "@/utils/authToken";
 import { useRouter } from "next/navigation";
 import styles from "./styles.module.scss";
+import Link from "next/link";
 
 const Page = () => {
   const router = useRouter();
@@ -18,19 +17,12 @@ const Page = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>(
-    {}
-  );
-
-//   const mutation = useMutation({
-//     mutationFn: async () => {
-//       const res = await api.post("/auth/signup", formData);
-//       return res.data;
-//     },
-//     onSuccess: () => {
-//       router.push("/login");
-//     },
-//   });
+  const [errors, setErrors] = useState<{
+    email?: string;
+    password?: string;
+    firstName?: string;
+    lastName?: string;
+  }>({});
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -73,32 +65,47 @@ const Page = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // mutation.mutate();
+    saveUser(formData);
+
+    const token = generateAuthToken();
+
+    saveSession({
+      user: {
+        email: formData.email,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+      },
+      token,
+    });
+
+    router.push("/login");
   };
   return (
     <div className={styles.signUp}>
-        <h1>Create Account</h1>
-        <p>Enter your details to sign up</p>
-        <form action="">
-            <label htmlFor="firstName">
-                First Name
-                <input type="text" name="firstName" value={formData.firstName} />
-            </label>
-            <label htmlFor="lastName">
-                Last Name
-                <input type="text" name="lastName" value={formData.lastName}  />
-            </label>
-            <label htmlFor="email">
-                Email
-                <input type="email" name="email" value={formData.email}  />
-            </label>
-            <label htmlFor="password">
-                Password
-                <input type="password" name="password" value={formData.password}  />
-            </label>
-            <button type="submit">Create Account</button>
-            <p>Already have an account? <Link href="/login">Login</Link></p>
-        </form>
+      <h1>Create Account</h1>
+      <p>Enter your details to sign up</p>
+      <form action="">
+        <label htmlFor="firstName">
+          First Name
+          <input type="text" name="firstName" value={formData.firstName} />
+        </label>
+        <label htmlFor="lastName">
+          Last Name
+          <input type="text" name="lastName" value={formData.lastName} />
+        </label>
+        <label htmlFor="email">
+          Email
+          <input type="email" name="email" value={formData.email} />
+        </label>
+        <label htmlFor="password">
+          Password
+          <input type="password" name="password" value={formData.password} />
+        </label>
+        <button type="submit">Create Account</button>
+        <p>
+          Already have an account? <Link href="/login">Login</Link>
+        </p>
+      </form>
     </div>
   );
 };
