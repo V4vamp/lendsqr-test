@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "/api/v1",
+  baseURL: "https://raw.githubusercontent.com/V4vamp/lendsqr-test/main",
   headers: {
     "Content-Type": "application/json",
   },
