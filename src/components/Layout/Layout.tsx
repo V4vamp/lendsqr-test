@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className={styles.layout}>
       <Navbar />
-      <main>
+      <main className={styles.mainLayout}>
         <div className={styles.sideBarContainer}>
             <SideBar />
         </div>
