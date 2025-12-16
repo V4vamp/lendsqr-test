@@ -76,7 +76,7 @@
                 text-decoration: underline;
                 text-decoration-style: solid;
                 text-decoration-thickness: 0%;
-                color: #213F7D;
+                color: $tertiary-color;
             }
 
             .userInfo {
@@ -104,7 +104,7 @@
                 font-size: 16px;
                 line-height: 100%;
                 letter-spacing: 0px;
-                color: #213F7D;
+                color: $tertiary-color;
                 gap: 8px;
                 cursor: pointer;
             }
@@ -128,7 +128,7 @@
             font-size: 16px;
             line-height: 100%;
             letter-spacing: 0px;
-            color: #213F7D;
+            color: $tertiary-color;
             opacity: 0.6;
             padding: 12px 24px;
             width: 100%;

@@ -3,13 +3,17 @@
 
 .paginationWrapper {
   @include flex-start;
+  width: 100%;
   margin-top: 24px;
   justify-content: space-between;
 }
 
 .showing {
   font-size: 14px;
+  font-family: $work;
   color: #545f7d;
+  @include flex-start;
+  align-items: center;
 
   span {
     background: #213f7d1a;
@@ -17,6 +21,7 @@
     border-radius: 4px;
     margin: 0 4px;
     font-weight: 500;
+    font-family: $work
   }
 }
 
@@ -32,6 +37,7 @@
     background: transparent;
     color: #545f7d;
     cursor: pointer;
+    font-family: $work;
 
     &:disabled {
       opacity: 0.4;

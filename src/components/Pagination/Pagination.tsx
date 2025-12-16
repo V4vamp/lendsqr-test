@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { User } from "@/types/types";
+import React from "react";
 import styles from "./paginate.module.scss";
 
 interface PaginationProps {

@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { Login } from "@/types/types";
 import { getStoredUser, saveSession } from "@/utils/auth";
 import { generateAuthToken } from "@/utils/authToken";
 import { useRouter } from "next/navigation";
@@ -86,7 +85,7 @@ const Signin = () => {
         token,
       });
 
-      router.push("/");
+      router.push("/dashboard/users");
     }, 800);
   };
   return (
@@ -126,7 +125,7 @@ const Signin = () => {
         {isLoading ? "Signing In..." : "Sign In"}
       </button>
 
-      <span className={styles.signupLink}>Don't have an account? Sign Up <Link href={"/signup"}>here</Link></span>
+      <span className={styles.signupLink}>Don&apos;t have an account? Sign Up <Link href={"/signup"}>here</Link></span>
     </form>
   );
 };

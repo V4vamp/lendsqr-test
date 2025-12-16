@@ -11,16 +11,11 @@ import { usePathname } from "next/navigation";
 const SideBar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<string>("");
 
   const isActive = (path: string) => pathname.startsWith(`/dashboard/${path}`);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleTabClick = (tabTitle: string) => {
-    setActiveTab(tabTitle);
   };
 
   return (

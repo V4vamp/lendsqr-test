@@ -14,9 +14,12 @@ const Navbar = () => {
   const [session, setSession] = useState<any>(null);
 
   useEffect(() => {
+  queueMicrotask(() => {
     setMounted(true);
     setSession(getSession());
-  }, []);
+  });
+}, []);
+
 
   if (!mounted) {
     return null;

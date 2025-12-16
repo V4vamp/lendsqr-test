@@ -1,13 +1,12 @@
-import React from 'react';
+import React from "react";
 import styles from "./styles.module.scss";
 import Image from "next/image";
 
-
 interface PageProps {
- children: React.ReactNode;
+  children: React.ReactNode;
 }
 
-const FormPage = ({children} : PageProps) => {
+const FormPage = ({ children }: PageProps) => {
   return (
     <div className={styles.page}>
       <section className={styles.pageImage}>
@@ -18,11 +17,13 @@ const FormPage = ({children} : PageProps) => {
           <Image src={"/images/bg-image.png"} alt="bg-image" fill />
         </div>
       </section>
-      <section className={styles.formArea}>
-        {children}
-      </section>
+      <div className={styles.logo}>
+        <Image src={"/images/logo.png"} alt="lendsqr logo" fill />
+      </div>
+      <section className={styles.formArea}>{children}</section>
+      
     </div>
-  )
-}
+  );
+};
 
-export default FormPage
+export default FormPage;

@@ -1,4 +1,5 @@
 @use "../../styles/mixins" as *;
+@use "../../styles/fonts" as *;
 
 .form {
     @include flex-start($direction: column);
@@ -14,32 +15,32 @@
         margin-bottom: 40px;
 
         h1 {
-            font-family: Avenir-bold;
+            font-family: $avenir;
             font-weight: 700;
             font-size: 40px;
             line-height: 100%;
             letter-spacing: -4%;
-            color: #213F7D;
+            color: $tertiary-color;
         }
 
         p {
-            font-family: Avenir;
+            font-family: $avenir;
             font-weight: 400;
             font-size: 20px;
             line-height: 100%;
             letter-spacing: 0%;
-            color: #545F7D;
+            color: $primary-color;
 
         }
     }
 
     .errorMessage {
-        font-family: Avenir-semi;
+        font-family: $avenir;
         font-weight: 400;
         font-size: 14px;
         line-height: 100%;
         letter-spacing: 0%;
-        color: #E4033B;
+        color: $danger;
         align-self: center;
     }
 
@@ -47,58 +48,58 @@
         width: 100%;
         @include flex-start($direction: column);
         gap: 8px;
-        font-family: Avenir-semi;
+        font-family: $avenir;
         font-weight: 500;
         font-size: 14px;
         line-height: 100%;
         letter-spacing: 0%;
-        color: #213F7D;
+        color: $tertiary-color;
 
         input {
             width: 100%;
-            border: 2px solid #545F7D26;
+            border: 2px solid $primary-color;
             border-radius: 5px;
             padding: 12px 16px;
             background: #FFFFFF;
-            font-family: Avenir;
+            font-family: $avenir;
             font-weight: 400;
             font-size: 16px;
             line-height: 100%;
             letter-spacing: 0%;
-            color: #545F7D;
+            color: $primary-color;
             outline: none;
 
             &::placeholder {
-                font-family: Avenir;
+                font-family: $avenir;
                 font-weight: 400;
                 font-size: 14px;
                 line-height: 100%;
                 letter-spacing: 0%;
-                color: #545F7D;
+                color: $primary-color;
                 outline: none;
             }
         }
 
         input:focus {
-            border-color: #39CDCC;
+            border-color: $secondary-color;
             background: transparent;
         }
 
         .errorText {
-            font-family: Avenir;
+            font-family: $avenir;
             font-weight: 400;
             font-size: 12px;
             line-height: 100%;
             letter-spacing: 0%;
-            color: #E4033B;
+            color: $danger;
             margin-top: -4px;
         }
 
         span {
             border: none;
             background: transparent;
-            font-family: Avenir-semi;
-            color: #39CDCC;
+            font-family: $avenir;
+            color: $secondary-color;
             font-weight: 600;
             font-size: 12px;
             line-height: 100%;
@@ -121,12 +122,12 @@
         gap: 8px;
         font-size: 14px;
         cursor: pointer;
-        font-family: Avenir-semi;
+        font-family: $avenir;
         font-weight: 500;
         font-size: 14px;
         line-height: 100%;
         letter-spacing: 0%;
-        color: #213F7D;
+        color: $tertiary-color;
     }
 
     input[type="checkbox"] {
@@ -147,30 +148,30 @@
     }
 
     input[type="checkbox"]:checked {
-        background: #213F7D;
-        border-color: #213F7D;
+        background: $tertiary-color;
+        border-color: $tertiary-color;
         padding: 2px;
     }
 
 
     a {
-        font-family: Avenir-semi;
+        font-family: $avenir;
         font-weight: 600;
         font-size: 12px;
         line-height: 100%;
         letter-spacing: 10%;
         text-align: right;
         text-transform: uppercase;
-        color: #39CDCC;
+        color: $secondary-color;
     }
 
     .resetButton {
         width: 100%;
-        background: #39CDCC;
+        background: $secondary-color;
         height: 48px;
         padding: 12px 24px;
         border-radius: 8px;
-        font-family: Avenir-semi;
+        font-family: $avenir;
         font-weight: 600;
         font-size: 14px;
         line-height: 100%;
@@ -183,18 +184,46 @@
     }
 
     .signinLink {
-        font-family: Avenir;
+        font-family: $avenir;
         font-weight: 400;
         font-size: 14px;
         line-height: 100%;
         letter-spacing: 0%;
-        color: #545F7D;
+        color: $primary-color;
 
         a {
-            font-family: Avenir-semi;
+            font-family: $avenir;
             font-weight: 600;
-            color: #39CDCC;
+            color: $secondary-color;
             text-decoration: none;
+        }
+    }
+}
+
+@include mobile {
+    .form {
+        width: 100%;
+        padding: 0px;
+        margin-top: 5dvh;
+        justify-content: flex-start;
+
+        .formText {
+            width: 100%;
+            margin-bottom: 0;
+
+            h1 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+
+        label {
+            input {
+                padding: 8px 16px;
+            }
         }
     }
 }

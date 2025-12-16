@@ -28,7 +28,7 @@ const Page = () => {
     };
 
     fetchUsers();
-  }, []);
+  }, [users.length]);
 
   if (loading) return <p className={styles.loading}>Loading users...</p>;
   if (error) return <p className={styles.error}>{error}</p>;
